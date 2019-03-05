@@ -4,6 +4,11 @@
 hypnos
 ======
 
+**Update 20190305: Revert PETRARCH Version to 1, to make example work**
+
+当前示例程序不正常，为确保可用，还原成为Petrarch 1。此外，合并了petrarch与Web服务，在一个docker镜像中执行。
+
+
 **Note: hypnos now works with PETRARCH2 by default.**
 
 A RESTful API around the [PETRARCH2](https://github.com/openeventdata/petrarch2)

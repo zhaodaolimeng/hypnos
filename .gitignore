@@ -1,4 +1,10 @@
 .DS_Store
 *.pyc
 *.swp
+*.egg
 .ropeproject
+.env
+build/
+docs/
+*egg-info/
+.vscode/

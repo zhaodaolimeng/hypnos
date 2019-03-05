@@ -1,0 +1,17 @@
+INFO 2019-03-05 13:17:35,617: Running
+INFO 2019-03-05 13:17:35,617: Using default config file.
+INFO 2019-03-05 13:17:35,618: Reading CAMEO.verbpatterns.150430.txt
+INFO 2019-03-05 13:17:35,740: Reading /home/limeng/Desktop/example-projects/petrarch/.env/local/lib/python2.7/site-packages/petrarch-0.1a0-py2.7.egg/petrarch/data/dictionaries/Phoenix.Countries.actors.txt
+WARNING 2019-03-05 13:17:35,807: End date in interval date restriction is less than starting date; line skipped
+INFO 2019-03-05 13:17:36,028: Reading /home/limeng/Desktop/example-projects/petrarch/.env/local/lib/python2.7/site-packages/petrarch-0.1a0-py2.7.egg/petrarch/data/dictionaries/Phoenix.International.actors.txt
+WARNING 2019-03-05 13:17:36,028: End date in interval date restriction is less than starting date; line skipped
+INFO 2019-03-05 13:17:36,113: Reading /home/limeng/Desktop/example-projects/petrarch/.env/local/lib/python2.7/site-packages/petrarch-0.1a0-py2.7.egg/petrarch/data/dictionaries/Phoenix.MilNonState.actors.txt
+INFO 2019-03-05 13:17:36,122: Reading Phoenix.agents.txt
+
+WARNING 2019-03-05 13:17:36,136: Codes are required for agents in .agents file ; line skipped
+INFO 2019-03-05 13:17:36,139: Reading Phoenix.discards.txt
+INFO 2019-03-05 13:17:36,140: Reading Phoenix.IssueCoding.txt
+INFO 2019-03-05 13:17:36,156: 
+
+Processing GOLD
+INFO 2019-03-05 13:17:36,156: 	Processing GOLD_8

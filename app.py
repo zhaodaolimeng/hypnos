@@ -6,10 +6,10 @@ from tornado.wsgi import WSGIContainer
 from tornado.httpserver import HTTPServer
 from flask import Flask, jsonify, make_response
 from flask.ext.restful import Api, Resource, reqparse
+from petrarch import petrarch, PETRglobals, PETRreader, utilities
 
 app = Flask(__name__)
 api = Api(app)
-
 cwd = os.path.abspath(os.path.dirname(__file__))
 
 
@@ -39,10 +39,8 @@ class ExtractAPI(Resource):
         date = args['date']
 
         out = send_to_ccnlp(text)
-
         event_dict = process_corenlp(out, date, storyid)
-
-        event_updated = send_to_petr(event_dict)
+        event_updated = petrarch.do_coding(event_dict, None)
 
         return event_updated
 
@@ -50,21 +48,10 @@ class ExtractAPI(Resource):
 def send_to_ccnlp(text):
     headers = {'Content-Type': 'application/json'}
     core_data = json.dumps({'text': text})
-    ccnlp_url = 'http://ccnlp:5000/process'
+    ccnlp_url = 'http://ccnlp:5000/process'    
     r = requests.post(ccnlp_url, data=core_data, headers=headers)
     out = r.json()
-
     return out
-
-
-def send_to_petr(event_dict):
-    headers = {'Content-Type': 'application/json'}
-    events_data = json.dumps({'events': event_dict})
-    petr_url = 'http://petrarch:5001/petrarch/code'
-    events_r = requests.post(petr_url, data=events_data, headers=headers)
-    event_updated = process_results(events_r.json())
-
-    return event_updated
 
 
 def process_corenlp(output, date, STORYID):
@@ -81,20 +68,16 @@ def process_corenlp(output, date, STORYID):
     return event_dict
 
 
-def process_results(event_dict):
-    for s_id in event_dict:
-        sents = event_dict[s_id]['sents']
-        for sent in sents:
-            if 'issues' not in sents[sent].keys():
-                sents[sent]['issues'] = []
-            if 'events' not in sents[sent].keys():
-                sents[sent]['events'] = []
-
-    return event_dict
-
 api.add_resource(ExtractAPI, '/hypnos/extract')
 
 if __name__ == '__main__':
+
+    config = petrarch.utilities._get_data('data/config/', 'PETR_config.ini')
+    print("reading config")
+    petrarch.PETRreader.parse_Config(config)
+    print("reading dicts")
+    petrarch.read_dictionaries()
+
     http_server = HTTPServer(WSGIContainer(app))
     http_server.listen(5002)
     IOLoop.instance().start()
